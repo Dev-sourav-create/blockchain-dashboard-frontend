@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function StatCard({ label, value, delta, icon }) {
+export default function Statcard({ label, value, delta, icon }) {
   const icons = {
     network: (
       <svg

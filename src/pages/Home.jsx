@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
-import StatCard from "../components/Statscard.";
+import Statcard from "../components/Statscard.";
 import PriceRow from "../components/Pricerow";
-import BlockRow from "../components/Blockrow";
+import BlockRow from "../components/BlockRow";
 import { fetchStats, fetchPrices, fetchBlocks } from "../api/api";
 import {
   ResponsiveContainer,
@@ -134,7 +134,7 @@ export default function Home() {
         {/* STATS GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
           {stats.map((s) => (
-            <StatCard
+            <Statcard
               key={s._id}
               label={s.label}
               value={s.value}
