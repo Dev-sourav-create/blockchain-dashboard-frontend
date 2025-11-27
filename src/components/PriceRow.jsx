@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Pricerow({ price }) {
+export default function PriceRow({ price }) {
   const isPositive = price.change24h >= 0;
   console.log(price.symbol);
 

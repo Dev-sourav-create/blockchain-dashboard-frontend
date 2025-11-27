@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Statcard from "../components/Statscard.";
-import Pricerow from "../components/Pricerow";
+import PriceRow from "../components/PriceRow";
 import BlockRow from "../components/BlockRow";
 import { fetchStats, fetchPrices, fetchBlocks } from "../api/api";
 import {
@@ -207,7 +207,7 @@ export default function Home() {
 
               <div className="divide-y">
                 {prices.map((price) => (
-                  <Pricerow key={price._id} price={price} />
+                  <PriceRow key={price._id} price={price} />
                 ))}
               </div>
             </div>
