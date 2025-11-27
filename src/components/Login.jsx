@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { loginSucces } from "../store/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
+
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isauthenticated } = useSelector((state) => state.auth);
+
+  const API = import.meta.env.VITE_API_BASE;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,7 +39,7 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch(`${API}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -49,14 +52,12 @@ export default function Login() {
         return setError(data.msg || "Login failed");
       }
 
-      // Save token in localStorage (optional because redux persist handles)
       localStorage.setItem("token", data.token);
 
-      //redux update
       dispatch(loginSucces({ user: data.user, token: data.token }));
       navigate("/");
 
-      toast.success("LoggedIn Succesfully!");
+      toast.success("Logged in successfully!");
     } catch (err) {
       setError("Server error, try again later");
     } finally {
@@ -72,14 +73,12 @@ export default function Login() {
       >
         <h2 className="text-2xl font-semibold mb-6">Sign In</h2>
 
-        {/* Error Message */}
         {error && (
           <div className="bg-red-100 text-red-600 p-3 rounded-md mb-4 text-sm">
             {error}
           </div>
         )}
 
-        {/* Email */}
         <div className="mb-4">
           <label className="block text-gray-600 mb-1">Email</label>
           <input
@@ -91,7 +90,6 @@ export default function Login() {
           />
         </div>
 
-        {/* Password */}
         <div className="mb-6">
           <label className="block text-gray-600 mb-1">Password</label>
           <div className="relative">
@@ -111,8 +109,6 @@ export default function Login() {
           </div>
         </div>
 
-        {/* Submit */}
-
         <button
           type="submit"
           disabled={loading}
@@ -120,8 +116,9 @@ export default function Login() {
         >
           {loading ? "Logging in..." : "Sign In"}
         </button>
-        <div className="flex  justify-center m-2 p-2 text-sm">
-          <p>Don't have an account?</p>{" "}
+
+        <div className="flex justify-center m-2 p-2 text-sm">
+          <p>Don't have an account?</p>
           <button
             className="text-green-500 mx-2"
             onClick={() => navigate("/signup")}

@@ -5,9 +5,11 @@ export default function DeveloperPopup({ open, onClose }) {
   const [openModal, setOpenModal] = useState(false);
   const [editEmployee, setEditEmployee] = useState(null);
 
+  const API = import.meta.env.VITE_API_BASE;
+
   // Fetch all employees
   const fetchEmployees = async () => {
-    const res = await fetch("http://localhost:5000/api/employee");
+    const res = await fetch(`${API}/employee`);
     const data = await res.json();
     setEmployees(data);
   };
@@ -34,13 +36,13 @@ export default function DeveloperPopup({ open, onClose }) {
     };
 
     if (editEmployee) {
-      await fetch(`http://localhost:5000/api/employee/${editEmployee._id}`, {
+      await fetch(`${API}/employee/${editEmployee._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
     } else {
-      await fetch(`http://localhost:5000/api/employee`, {
+      await fetch(`${API}/employee`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -54,7 +56,7 @@ export default function DeveloperPopup({ open, onClose }) {
 
   // Delete employee
   const handleDelete = async (id) => {
-    await fetch(`http://localhost:5000/api/employee/${id}`, {
+    await fetch(`${API}/employee/${id}`, {
       method: "DELETE",
     });
     fetchEmployees();
@@ -62,10 +64,10 @@ export default function DeveloperPopup({ open, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 flex justify-center items-start pt-10 sm:pt-16 z-50 "
+      className="fixed inset-0 flex justify-center items-start pt-10 sm:pt-16 z-50"
       onClick={onClose}
     >
-      {/* MAIN POPUP BOX */}
+      {/* MAIN POPUP */}
       <div
         className="bg-white w-full max-w-4xl mx-3 sm:mx-auto rounded-xl shadow-xl p-4 sm:p-6 max-h-[85vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
@@ -75,7 +77,6 @@ export default function DeveloperPopup({ open, onClose }) {
           <h2 className="text-lg sm:text-xl font-semibold">
             Employee Management
           </h2>
-
           <button
             onClick={onClose}
             className="p-2 hover:bg-gray-200 rounded-full"
@@ -84,7 +85,7 @@ export default function DeveloperPopup({ open, onClose }) {
           </button>
         </div>
 
-        {/* RESPONSIVE TABLE */}
+        {/* TABLE */}
         <div className="border border-gray-200 rounded-lg overflow-x-auto">
           <table className="w-full text-sm min-w-[600px]">
             <thead className="bg-gray-100 border-b">
@@ -108,7 +109,7 @@ export default function DeveloperPopup({ open, onClose }) {
                   <td className="p-3 text-right">
                     <div className="inline-flex gap-3">
                       <button
-                        className="text-blue-500 "
+                        className="text-blue-500"
                         onClick={() => {
                           setEditEmployee(emp);
                           setOpenModal(true);
@@ -116,7 +117,6 @@ export default function DeveloperPopup({ open, onClose }) {
                       >
                         Edit
                       </button>
-
                       <button
                         className="text-red-500"
                         onClick={() => handleDelete(emp._id)}
@@ -131,20 +131,20 @@ export default function DeveloperPopup({ open, onClose }) {
           </table>
         </div>
 
-        {/* ADD EMPLOYEE BUTTON */}
+        {/* ADD BUTTON */}
         <button
           onClick={() => {
             setEditEmployee(null);
             setOpenModal(true);
           }}
-          className="mt-4 px-4 py-2  active:scale-95 transition-all duration-300 bg-green-600 text-white rounded-lg w-full sm:w-auto"
+          className="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg w-full sm:w-auto active:scale-95 transition-all"
         >
           + Add Employee
         </button>
 
         {/* FORM MODAL */}
         {openModal && (
-          <div className="fixed inset-0 flex justify-center items-center z-50 ">
+          <div className="fixed inset-0 flex justify-center items-center z-50">
             <form
               onSubmit={handleSubmit}
               className="bg-white p-6 rounded-xl shadow-xl w-full mx-4 max-w-md space-y-4"
@@ -153,7 +153,6 @@ export default function DeveloperPopup({ open, onClose }) {
                 {editEmployee ? "Edit Employee" : "Add Employee"}
               </h3>
 
-              {/* INPUT FIELDS — responsive */}
               {[
                 "name",
                 "email",
@@ -167,12 +166,9 @@ export default function DeveloperPopup({ open, onClose }) {
                   key={field}
                   name={field}
                   defaultValue={editEmployee?.[field]}
-                  placeholder={
-                    field.charAt(0).toUpperCase() +
-                    field.slice(1).replace(/([A-Z])/g, " $1")
-                  }
+                  placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
                   required
-                  className="border border-gray-400 p-2 w-full rounded"
+                  className="border p-2 w-full rounded"
                 />
               ))}
 
@@ -180,13 +176,14 @@ export default function DeveloperPopup({ open, onClose }) {
                 <button
                   type="button"
                   onClick={() => setOpenModal(false)}
-                  className="px-4 py-2 bg-gray-200  active:scale-95 transition-all duration-300 rounded"
+                  className="px-4 py-2 bg-gray-200 rounded active:scale-95 transition-all"
                 >
                   Cancel
                 </button>
+
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-green-600  active:scale-95 transition-all duration-300 text-white rounded"
+                  className="px-4 py-2 bg-green-600 text-white rounded active:scale-95 transition-all"
                 >
                   Save
                 </button>

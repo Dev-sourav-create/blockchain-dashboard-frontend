@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 export default function Signup() {
+  const API = import.meta.env.VITE_API_BASE; // ✅ Use env variable
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,7 +29,8 @@ export default function Signup() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/signup", {
+      const res = await fetch(`${API}/auth/signup`, {
+        // ✅ FIXED
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
@@ -120,7 +123,7 @@ export default function Signup() {
           />
         </div>
 
-        {/* Submit Button */}
+        {/* Submit */}
         <button
           type="submit"
           disabled={loading}

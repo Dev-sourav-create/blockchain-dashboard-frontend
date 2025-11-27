@@ -29,9 +29,11 @@ export default function Home() {
   const [employees, setEmployees] = useState([]);
   const navigate = useNavigate();
 
+  const API = import.meta.env.VITE_API_BASE; // ✅ added
+
   const fetchEmployees = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/employee");
+      const res = await fetch(`${API}/employee`); // ✅ fixed
       const data = await res.json();
 
       const formatted = data.map((emp) => ({
@@ -72,6 +74,7 @@ export default function Home() {
           <path d="M4 18h16" />
         </svg>
       </button>
+
       {/* SIDEBAR */}
       <Sidebar
         open={sidebarOpen}
