@@ -15,6 +15,7 @@ import {
 import { Piechart } from "../components/PieChart";
 import { useNavigate } from "react-router";
 import { SearchBox } from "../components/SearchBox";
+import DeveloperPopup from "../components/DeveloperPopup";
 
 export default function Home() {
   const [stats, setStats] = useState([]);
@@ -23,6 +24,7 @@ export default function Home() {
   const [chartData, setChartData] = useState([]);
   const [openPalette, setOpenPalette] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [developerOpen, setDeveloperOpen] = useState(false);
 
   const [employees, setEmployees] = useState([]);
   const navigate = useNavigate();
@@ -71,13 +73,21 @@ export default function Home() {
         </svg>
       </button>
       {/* SIDEBAR */}
-      <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <Sidebar
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        onDeveloper={() => setDeveloperOpen(true)}
+      />
 
       {/* SEARCH MODAL */}
       <SearchBox
         open={openPalette}
         onClose={() => setOpenPalette(false)}
         data={employees}
+      />
+      <DeveloperPopup
+        open={developerOpen}
+        onClose={() => setDeveloperOpen(false)}
       />
 
       {/* MAIN CONTENT */}

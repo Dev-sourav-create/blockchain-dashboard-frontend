@@ -1,9 +1,11 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../store/authSlice";
+import { useNavigate } from "react-router-dom";
 
-export default function Sidebar({ open, onClose }) {
+export default function Sidebar({ open, onClose, onDeveloper }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
     <aside
@@ -64,19 +66,27 @@ export default function Sidebar({ open, onClose }) {
           </button>
 
           {[
-            "Prices",
-            "Charts",
-            "NFTs",
-            "DeFi",
-            "Academy",
-            "News",
-            "Developer",
+            { name: "Prices", path: "/" },
+            { name: "Charts", path: "/" },
+            { name: "NFTs", path: "/" },
+            { name: "DeFi", path: "/" },
+            { name: "Academy", path: "/" },
+            { name: "News", path: "/" },
+            { name: "Developer", path: "developer" },
           ].map((item) => (
             <button
-              key={item}
+              key={item.name}
+              onClick={() => {
+                if (item.name === "Developer") {
+                  onDeveloper(); // OPEN DEVELOPER POPUP
+                } else {
+                  navigate(item.path); // navigate normally
+                }
+                onClose(); // always close sidebar in mobile
+              }}
               className="w-full text-left p-3 rounded-lg hover:bg-gray-100"
             >
-              {item}
+              {item.name}
             </button>
           ))}
         </nav>
