@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Statcard from "../components/Statscard.";
-import PriceRow from "../components/Pricerow";
+import Pricerow from "../components/Pricerow";
 import BlockRow from "../components/BlockRow";
 import { fetchStats, fetchPrices, fetchBlocks } from "../api/api";
 import {
@@ -12,7 +12,7 @@ import {
   YAxis,
   Tooltip,
 } from "recharts";
-import { Piechart } from "../components/PieChart";
+import { PieChart } from "../components/PieChart";
 import { useNavigate } from "react-router";
 import { SearchBox } from "../components/SearchBox";
 import DeveloperPopup from "../components/DeveloperPopup";
@@ -231,7 +231,7 @@ export default function Home() {
 
             <div className="bg-white p-6 rounded-xl shadow">
               <h3 className="font-semibold mb-4">Total Revenue</h3>
-              <Piechart />
+              <PieChart />
             </div>
           </div>
         </div>

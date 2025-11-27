@@ -1,6 +1,6 @@
 import React from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
-export const Piechart = () => {
+export const PieChart = () => {
   return (
     <div className="h-52">
       <ResponsiveContainer width="100%" height="100%">
