@@ -207,7 +207,7 @@ export default function Home() {
 
               <div className="divide-y">
                 {prices.map((price) => (
-                  <PriceRow key={price._id} price={price} />
+                  <Pricerow key={price._id} price={price} />
                 ))}
               </div>
             </div>
