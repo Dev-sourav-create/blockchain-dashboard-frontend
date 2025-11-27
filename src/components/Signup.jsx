@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 
 export default function Signup() {
   const API = import.meta.env.VITE_API_BASE; // ✅ Use env variable
@@ -10,6 +11,7 @@ export default function Signup() {
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const validate = () => {
     if (!name.trim()) return "Name is required";
@@ -44,7 +46,7 @@ export default function Signup() {
       }
 
       alert("Account Created Successfully!");
-      window.location.href = "/login";
+      navigate("/login");
     } catch (err) {
       setError("Server error, try again later");
     } finally {
