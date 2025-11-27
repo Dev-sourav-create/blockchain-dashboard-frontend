@@ -16,7 +16,7 @@ import {
 import { useNavigate } from "react-router";
 import { SearchBox } from "../components/SearchBox";
 import DeveloperPopup from "../components/DeveloperPopup";
-import { PieChart } from "../components/PieChart";
+import PieChartComponent from "../components/PieChartComponent";
 
 export default function Home() {
   const [stats, setStats] = useState([]);
@@ -232,7 +232,7 @@ export default function Home() {
 
             <div className="bg-white p-6 rounded-xl shadow">
               <h3 className="font-semibold mb-4">Total Revenue</h3>
-              <PieChart />
+              <PieChartComponent />
             </div>
           </div>
         </div>

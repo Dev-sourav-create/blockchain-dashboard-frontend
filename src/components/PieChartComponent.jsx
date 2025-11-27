@@ -1,10 +1,17 @@
 import React from "react";
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
-export const PieChart = () => {
+import {
+  PieChart as RePieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
+
+export default function PieChartComponent() {
   return (
     <div className="h-52">
       <ResponsiveContainer width="100%" height="100%">
-        <PieChart>
+        <RePieChart>
           <Pie
             data={[
               { name: "Bitcoin", value: 45 },
@@ -22,8 +29,8 @@ export const PieChart = () => {
             <Cell fill="#f97316" />
           </Pie>
           <Tooltip />
-        </PieChart>
+        </RePieChart>
       </ResponsiveContainer>
     </div>
   );
-};
+}
