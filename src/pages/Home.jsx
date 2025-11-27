@@ -12,10 +12,11 @@ import {
   YAxis,
   Tooltip,
 } from "recharts";
-import { PieChart } from "../components/PieChart";
+
 import { useNavigate } from "react-router";
 import { SearchBox } from "../components/SearchBox";
 import DeveloperPopup from "../components/DeveloperPopup";
+import { PieChart } from "../components/PieChart";
 
 export default function Home() {
   const [stats, setStats] = useState([]);
