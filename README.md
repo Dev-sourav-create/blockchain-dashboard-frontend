@@ -67,3 +67,7 @@ baseURL: import.meta.env.VITE_API_BASE
 
 
 Store configs in .env.production
+
+Note: Backend environment variables such as MongoDB connection string and JWT secret 
+are not included in the repository. They are securely stored in Render environment settings.
+
